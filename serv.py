@@ -14,6 +14,7 @@ wind = Tk()
 a = []
 wind.title("Server")
 wind.geometry("300x50")
+
 l = Label(wind, fg = "red", justify = "right" , padx = 10, pady = 10, font = "Times", text = TextPrint)
 l.pack(side="right")
 wind.update()
@@ -22,6 +23,11 @@ wind.update()
 def toggle_server():
     global if_run, sock, conn
     if if_run == False:
+
+        TextPrint = "Waiting.."
+        l[ "text" ] =  TextPrint
+        wind.update()
+
         b.configure(text = TEXT_STOP)
         sock = socket.socket()
         sock.bind(('', 9092))
@@ -30,6 +36,7 @@ def toggle_server():
         addrnew = (addr[0:1], ":", addr[1:2])
 
         print 'connected:', addr
+
         TextPrint = addrnew
         l[ "text" ] =  TextPrint
         wind.update()
@@ -44,11 +51,13 @@ def toggle_server():
         if_run = True
 
     else:
+
         b.configure(text = TEXT_RUN)
         conn.close();
         TextPrint = ""
         l[ "text" ] =  TextPrint
         wind.update()
+
         if_run = False
     return if_run
 
