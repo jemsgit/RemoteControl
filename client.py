@@ -4,7 +4,7 @@ import socket
 
 sock = socket.socket()
 sock.connect(('192.168.0.47', 9092))
-passwd = "12345"
+passwd = '1234'
 sock.send(passwd)
 data = sock.recv(1024)
 print data

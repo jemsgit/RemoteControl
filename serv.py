@@ -1,31 +1,45 @@
 # -*- coding: utf-8 -*-
 
-import socket, os, string
+import socket, os, string, subprocess
 from Tkinter import *
 from random import choice
 
+
+a = []
 PORT = 9092
 if_run = False
 TEXT_RUN = "Run Server"
 TEXT_STOP = "Stop Server"
+passwd = '1234'
+#passwd = ''.join([choice(string.letters + string.digits) for i in range(5)])
 
-size = 5
-passwd = ''.join([choice(string.letters + string.digits) for i in range(size)])
-TextPrint = passwd
-
+# ----- Make window
 wind = Tk()
-a = []
 wind.title("Server")
-wind.geometry("300x60")
+wind.geometry("300x80")
+
+# ----- Get IP Host
+
+sock = socket.socket()
+sock.connect(("google.com",80))
+TextPrint2 = "Host IP : " + sock.getsockname()[0]
+TextPrint = "Passwod is : " + passwd
+sock.close()
 
 
-l = Label(wind, fg = "red", justify = "right" , padx = 10, pady = 10, font = "Times", text = TextPrint)
-l.pack(side="right")
+# ----- Print Info
+
+l = Label(wind, fg = "red", justify = "right" , padx = 10, font = "Times", text = TextPrint)
+l.pack()
+wind.update()
+
+lal = Label(wind, fg = "blue", padx = 10,  font = "Times", text = TextPrint2)
+lal.pack()
 wind.update()
 
 
 def toggle_server():
-    global if_run, conn, passwd
+    global if_run, conn, passwd, sock
     if if_run == False:
 
         TextPrint = passwd + " : " "Waiting.."
@@ -67,6 +81,7 @@ def toggle_server():
                if not data:
                    break
                conn.send(data)
+               os.system(a[-1])
            if_run = True 
 
     else:
@@ -79,9 +94,12 @@ def toggle_server():
         if_run = False
     return if_run
 
+
 b = Button(wind, text = TEXT_RUN, command=toggle_server)
 b.pack()
-b.place(x = 10, y = 15)
+b.place(x = 100, y = 50)
+
 wind.mainloop()
 
-os.system(a[0])
+        
+
