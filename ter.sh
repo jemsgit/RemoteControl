@@ -1,3 +1,3 @@
 #!/bin/sh
-alltray python serv.py 
+alltray python /usr/share/remjem/serv.py
 

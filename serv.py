@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import socket, os, string, subprocess
+import socket, os, string, subprocess, Image, ImageTk
 from Tkinter import *
 from random import choice
 
@@ -17,6 +17,9 @@ passwd = '1234'
 wind = Tk()
 wind.title("Server")
 wind.geometry("300x80")
+img = PhotoImage(file='/usr/share/remjem/icon.gif')
+wind.tk.call('wm', 'iconphoto', wind._w, img)
+
 
 # ----- Get IP Host
 
